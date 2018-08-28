@@ -11,4 +11,4 @@ NumPy - http://www.numpy.org/
 ### License
 MIT License
 
-### KC_Word2Vec_20180828
+### KC_Word2Vec_20180828_0519
