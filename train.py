@@ -11,13 +11,13 @@ DATA_PATH   = os.path.join(SCRIPT_PATH, 'pdfdata/')
 MODEL_PATH  = os.path.join(SCRIPT_PATH, 'model/')
 
 DICTIONARY_FILEPATH = os.path.join(DATA_PATH, 'english_wordids.txt.bz2')
-#WIKI_DUMP_FILEPATH = os.path.join(DATA_PATH, 'outputPDF.text')
-WIKI_DUMP_FILEPATH = os.path.join(DATA_PATH, 'StopWordRemovelPDF.text')
+#myDictionaryFILEPATH = os.path.join(DATA_PATH, 'outputPDF.text')
+myDictionaryFILEPATH = os.path.join(DATA_PATH, 'StopWordRemovelPDF.text')
 
 if __name__ == '__main__':
 
     # Check if the required files have been downloaded
-    if not WIKI_DUMP_FILEPATH:
+    if not myDictionaryFILEPATH:
         print('Wikipedia articles dump could not be found..')
         print('Please see README.md for instructions!')
         sys.exit()
@@ -34,35 +34,37 @@ if __name__ == '__main__':
 
     if not os.path.isfile(DICTIONARY_FILEPATH):
         logging.info('Dictionary has not been created yet..')
-        logging.info('Creating dictionary (takes about 9h)..')
+        logging.info('Creating dictionary..')
 
         # Construct corpus
-        wiki = gensim.corpora.TextCorpus(WIKI_DUMP_FILEPATH)
+        myDictionary = gensim.corpora.TextCorpus(myDictionaryFILEPATH)
+
+        #https://radimrehurek.com/gensim/corpora/textcorpus.html
 
         # Remove words occuring less than 20 times, and words occuring in more
         # than 10% of the documents. (keep_n is the vocabulary size)
-        wiki.dictionary.filter_extremes(no_below=20, no_above=0.1, keep_n=10000)
+        dictionary.filter_extremes(no_below=20, no_above=0.1, keep_n=10000)
 
         # Save dictionary to file
-        wiki.dictionary.save_as_text(DICTIONARY_FILEPATH)
-        del wiki
+        dictionary.save_as_text(DICTIONARY_FILEPATH)
+        del myDictionary
 
     # Load dictionary from file
     dictionary = gensim.corpora.Dictionary.load_from_text(DICTIONARY_FILEPATH)
 
     # Construct corpus using dictionary
-    wiki = gensim.corpora.TextCorpus(WIKI_DUMP_FILEPATH, dictionary=dictionary)
+    myDictionary = gensim.corpora.TextCorpus(myDictionaryFILEPATH, dictionary=dictionary)
 
     class SentencesIterator:
-        def __init__(self, wiki):
-            self.wiki = wiki
+        def __init__(self, myDictionary):
+            self.myDictionary = myDictionary
 
         def __iter__(self):
-            for sentence in self.wiki.get_texts():
+            for sentence in self.myDictionary.get_texts():
                 yield list(map(lambda x: x.decode('utf-8'), sentence))
 
     # Initialize simple sentence iterator required for the Word2Vec model
-    sentences = SentencesIterator(wiki)
+    sentences = SentencesIterator(myDictionary)
 
     logging.info('Training word2vec model..')
     model = gensim.models.Word2Vec(sentences=sentences, size=300, min_count=1, window=5, workers=cores)
