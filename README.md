@@ -31,4 +31,7 @@ git config --global user.name "Your Name"
 
 [branch "master"]
 	remote = origin
+
+git pull or git pull --allow-unrelated-histories
+git push
 -->
