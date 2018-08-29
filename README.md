@@ -18,8 +18,17 @@ MIT License
 ### step 3    : train PC (train.py)
 ### step 4    : test2.py
 
+<!--
 
-### Github setup remarks
+Setup atom
+
 Run:
 git config --global user.email "you@example.com"
 git config --global user.name "Your Name"
+
+[remote "origin"]
+	url = https://github.com/KwokCK/KC_Word2Vec.git
+
+[branch "master"]
+	remote = origin
+-->
