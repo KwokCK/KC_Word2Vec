@@ -11,9 +11,15 @@ NumPy - http://www.numpy.org/
 ### License
 MIT License
 
-### KC_Word2Vec_20180828_0519
-# step 1    : output pdf into txt
-#           : Command in python cosole  : textract pdfdata/Thinking_in_Java_4th_edition.pdf > pdfdata/outputPDF.text
-# step 2    : Stop word removel and remove punctuation (removal.py)
-# step 3    : train PC (train.py)
-# step 4    : test2.py
+### KC_Word2Vec_20180829_1204
+### step 1    : output pdf into txt
+###           : Command in python cosole  : textract pdfdata/Thinking_in_Java_4th_edition.pdf > pdfdata/outputPDF.text
+### step 2    : Stop word removel and remove punctuation (removal.py)
+### step 3    : train PC (train.py)
+### step 4    : test2.py
+
+
+### Github setup remarks
+Run:
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
