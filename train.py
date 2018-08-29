@@ -39,8 +39,11 @@ if __name__ == '__main__':
         # Construct corpus
         myDictionary = gensim.corpora.TextCorpus(myDictionaryFILEPATH)
 
-        #https://radimrehurek.com/gensim/corpora/textcorpus.html
-
+        '''
+        https://radimrehurek.com/gensim/corpora/textcorpus.html
+        https://stackoverflow.com/questions/22079418/filter-out-tokens-that-occur-exactly-once-in-a-gensim-dictionary/22123293
+        '''
+        
         # Remove words occuring less than 20 times, and words occuring in more
         # than 10% of the documents. (keep_n is the vocabulary size)
         dictionary.filter_extremes(no_below=20, no_above=0.1, keep_n=10000)
@@ -67,7 +70,7 @@ if __name__ == '__main__':
     sentences = SentencesIterator(myDictionary)
 
     logging.info('Training word2vec model..')
-    model = gensim.models.Word2Vec(sentences=sentences, size=300, min_count=1, window=5, workers=cores)
+    model = gensim.models.Word2Vec(sentences=sentences, size=300, min_count=5, window=5, workers=cores)
 
     # Save model
     logging.info('Saving model..')
