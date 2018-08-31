@@ -1,8 +1,9 @@
 import io
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
-#word_tokenize accepts a string as an input, not a file.
+# word_tokenize accepts a string as an input, not a file.
 
+# Remove stopwords
 to_remove = ['for', 'do', 'while']
 stop_words = set(stopwords.words('english')).difference(to_remove)
 
@@ -14,3 +15,7 @@ for r in words:
         appendFile = open('pdfdata/StopWordRemovelPDF.text','a')
         appendFile.write(" "+r)
         appendFile.close()
+
+# Stemming
+# punctuation
+# numbers

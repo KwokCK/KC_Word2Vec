@@ -14,7 +14,7 @@ from gensim.models.word2vec import LineSentence
 # step 2    : Stop word removel and remove punctuation
 # step 3    : train PC
 # step 4    : test2.py
- 
+
 if __name__ == '__main__':
     program = os.path.basename(sys.argv[0])
     logger = logging.getLogger(program)
@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
     # check and process input arguments
     if len(sys.argv) < 4:
-        print("Useing: python train_word2vec_model.py input_text output_gensim_model output_word_vector")
+        print("Useing: python train_word2vec_model.py pdfdata/StopWordRemovelPDF.text model/output_gensim_model model/output_word_vector")
         sys.exit(1)
     inp, outp1, outp2 = sys.argv[1:4]
 
@@ -39,6 +39,7 @@ if __name__ == '__main__':
                      size=200,
                      window=5,
                      min_count=5,
+                     iter=50,
                      workers=multiprocessing.cpu_count()
                      )
 

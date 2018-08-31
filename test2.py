@@ -9,7 +9,8 @@ MODEL_PATH  = os.path.join(SCRIPT_PATH, 'model/')
 if __name__ == '__main__':
 
     # Load word2vec model
-    model = gensim.models.Word2Vec.load(os.path.join(MODEL_PATH, 'word2vec.model'), mmap='r')
+    # model = gensim.models.Word2Vec.load(os.path.join(MODEL_PATH, 'word2vec.model'), mmap='r')
+    model = gensim.models.Word2Vec.load(os.path.join(MODEL_PATH, 'output_gensim_model'), mmap='r')
 
 while True:
     try:
